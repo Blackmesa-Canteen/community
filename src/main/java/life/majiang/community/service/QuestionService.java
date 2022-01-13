@@ -79,6 +79,7 @@ public class QuestionService {
             }
         }
 
+        // TODO 为了数总页数需要查一次数据库, 能不能把总页数搞到缓存里去呢?
         Integer totalCount = questionExtMapper.countBySearch(questionQueryDTO);
 
         if (totalCount % size == 0) {

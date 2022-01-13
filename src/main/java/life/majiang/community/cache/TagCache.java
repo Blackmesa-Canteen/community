@@ -15,6 +15,8 @@ public class TagCache {
     public static List<TagDTO> get() {
         List<TagDTO> tagDTOS = new ArrayList<>();
         TagDTO program = new TagDTO();
+
+        // TODO tags直接写死在内存中, 能不能持久化到数据库中呢? 然后给个前端编辑的界面, 后端给对应接口, 然后再用缓存缓存持久化的tag信息
         program.setCategoryName("开发语言");
         program.setTags(Arrays.asList("javascript", "php", "css", "html", "html5", "java", "node.js", "python", "c++", "c", "golang", "objective-c", "typescript", "shell", "swift", "c#", "sass", "ruby", "bash", "less", "asp.net", "lua", "scala", "coffeescript", "actionscript", "rust", "erlang", "perl"));
         tagDTOS.add(program);

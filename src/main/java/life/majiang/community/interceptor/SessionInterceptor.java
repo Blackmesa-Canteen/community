@@ -39,6 +39,9 @@ public class SessionInterceptor implements HandlerInterceptor {
     @Value("${gitee.redirect.uri}")
     private String giteeRedirectUri;
 
+    /* TODO 这个登录拦截器就特么拦截了个寂寞. 这个就是说读取一下cookie里有没有放进去user令牌, 如果有, 就在session
+     * 里放进登录信息, 然后**还需要在每个Controller里写session的判定逻辑!**, 绝了我的天
+     */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //设置 context 级别的属性
@@ -49,7 +52,7 @@ public class SessionInterceptor implements HandlerInterceptor {
             request.getServletContext().setAttribute(adPos.name(), adService.list(adPos.name()));
         }
         Cookie[] cookies = request.getCookies();
-        if (cookies != null && cookies.length != 0)
+        if (cookies != null && cookies.length != 0) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("token") && StringUtils.isNotBlank(cookie.getValue())) {
                     String token = cookie.getValue();
@@ -66,6 +69,7 @@ public class SessionInterceptor implements HandlerInterceptor {
                     break;
                 }
             }
+        }
         return true;
     }
 
